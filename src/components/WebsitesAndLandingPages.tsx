@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,7 +15,7 @@ import {
   Trash2,
   ExternalLink,
   Smartphone,
-  Desktop,
+  Monitor,
   TrendingUp,
   Users,
   Clock
@@ -182,7 +181,7 @@ export function WebsitesAndLandingPages() {
             {templates.map((template) => (
               <Card key={template.id} className="overflow-hidden">
                 <div className="aspect-video bg-muted flex items-center justify-center">
-                  <Desktop className="h-12 w-12 text-muted-foreground" />
+                  <Monitor className="h-12 w-12 text-muted-foreground" />
                 </div>
                 <CardHeader>
                   <CardTitle className="text-lg">{template.name}</CardTitle>
@@ -221,7 +220,7 @@ export function WebsitesAndLandingPages() {
             </CardHeader>
             <CardContent>
               <div className="text-center py-12">
-                <Desktop className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+                <Monitor className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
                 <h3 className="text-lg font-semibold mb-2">Visual Page Builder</h3>
                 <p className="text-muted-foreground mb-4">
                   Drag and drop elements to create stunning websites without coding
