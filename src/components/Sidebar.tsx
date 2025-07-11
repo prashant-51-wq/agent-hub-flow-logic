@@ -9,7 +9,11 @@ import {
   CreditCard,
   Settings,
   Store,
-  Zap
+  Zap,
+  Contact,
+  Calendar,
+  MessageSquare,
+  Phone
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +27,9 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
     { id: "marketplace", label: "Agent Marketplace", icon: Store },
     { id: "workflows", label: "My Workflows", icon: Workflow },
     { id: "analytics", label: "Analytics", icon: BarChart3 },
+    { id: "crm", label: "CRM", icon: Contact },
+    { id: "conversations", label: "Conversations", icon: MessageSquare },
+    { id: "calendar", label: "Calendar", icon: Calendar },
     { id: "agents", label: "My Agents", icon: Bot },
     { id: "clients", label: "Sub Accounts", icon: Users },
     { id: "billing", label: "Billing", icon: CreditCard },
@@ -51,6 +58,11 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
                   12
                 </Badge>
               )}
+              {item.id === "conversations" && (
+                <Badge variant="destructive" className="ml-auto">
+                  5
+                </Badge>
+              )}
             </Button>
           ))}
         </div>
@@ -65,6 +77,10 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
             <div className="flex justify-between">
               <span>Workflows</span>
               <span className="font-medium">156</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Leads</span>
+              <span className="font-medium">1,247</span>
             </div>
             <div className="flex justify-between">
               <span>Sub Accounts</span>
