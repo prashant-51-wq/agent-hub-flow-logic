@@ -1,11 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { Header } from "@/components/Header";
+import { Sidebar } from "@/components/Sidebar";
+import { AgentMarketplace } from "@/components/AgentMarketplace";
+import { WorkflowOverview } from "@/components/WorkflowOverview";
+import { AnalyticsDashboard } from "@/components/AnalyticsDashboard";
+import { useState } from "react";
 
 const Index = () => {
+  const [activeSection, setActiveSection] = useState("marketplace");
+
+  const renderActiveSection = () => {
+    switch (activeSection) {
+      case "marketplace":
+        return <AgentMarketplace />;
+      case "workflows":
+        return <WorkflowOverview />;
+      case "analytics":
+        return <AnalyticsDashboard />;
+      default:
+        return <AgentMarketplace />;
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="flex">
+        <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
+        <main className="flex-1 p-6">
+          {renderActiveSection()}
+        </main>
       </div>
     </div>
   );
