@@ -1,86 +1,77 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
-  Search, 
-  MessageSquare,
-  Phone,
-  Video,
-  Mail,
-  Clock,
-  User,
-  Bot,
+  MessageSquare, 
+  Phone, 
+  Mail, 
+  Send,
+  Search,
+  Filter,
+  MoreVertical,
   Star,
   Archive,
-  MoreHorizontal
+  Reply,
+  Forward,
+  Trash2
 } from "lucide-react";
 
 export function Conversations() {
   const conversations = [
     {
       id: 1,
-      contact: "Sarah Johnson",
-      company: "TechStart Inc",
-      lastMessage: "Thanks for the demo! When can we schedule the next call?",
-      timestamp: "5 min ago",
-      unread: 2,
-      channel: "Email",
-      priority: "High",
-      agent: "AI Sales Assistant"
+      contact: "John Smith",
+      email: "john@example.com",
+      lastMessage: "Thanks for the quick response! When can we schedule a call?",
+      timestamp: "2 mins ago",
+      unread: 3,
+      channel: "email",
+      priority: "high",
+      tags: ["Hot Lead", "Enterprise"]
     },
     {
       id: 2,
-      contact: "Michael Chen",
-      company: "Digital Solutions",
-      lastMessage: "I'm interested in your enterprise package. Can you send me more details?",
-      timestamp: "23 min ago",
+      contact: "Sarah Johnson",
+      email: "sarah@company.com",
+      lastMessage: "I'm interested in your premium package. Can you send more details?",
+      timestamp: "15 mins ago",
       unread: 1,
-      channel: "WhatsApp",
-      priority: "Medium",
-      agent: "Customer Support Bot"
+      channel: "chat",
+      priority: "medium",
+      tags: ["Prospect"]
     },
     {
       id: 3,
-      contact: "Emily Rodriguez",
-      company: "Growth Marketing Pro",
-      lastMessage: "The proposal looks great! I need to discuss with my team.",
-      timestamp: "2 hours ago",
+      contact: "Mike Wilson",
+      phone: "+1 (555) 123-4567",
+      lastMessage: "Left voicemail regarding the proposal discussion",
+      timestamp: "1 hour ago",
       unread: 0,
-      channel: "SMS",
-      priority: "High",
-      agent: "Human Agent"
-    },
-    {
-      id: 4,
-      contact: "David Wilson",
-      company: "E-commerce Hub",
-      lastMessage: "Can you help me understand your pricing structure?",
-      timestamp: "1 day ago",
-      unread: 0,
-      channel: "Live Chat",
-      priority: "Low",
-      agent: "AI Support Agent"
+      channel: "phone",
+      priority: "low",
+      tags: ["Follow-up"]
     }
   ];
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "High": return "bg-red-100 text-red-800";
-      case "Medium": return "bg-yellow-100 text-yellow-800";
-      case "Low": return "bg-gray-100 text-gray-800";
-      default: return "bg-gray-100 text-gray-800";
+  const getChannelIcon = (channel: string) => {
+    switch (channel) {
+      case "email": return <Mail className="h-4 w-4" />;
+      case "chat": return <MessageSquare className="h-4 w-4" />;
+      case "phone": return <Phone className="h-4 w-4" />;
+      default: return <MessageSquare className="h-4 w-4" />;
     }
   };
 
-  const getChannelIcon = (channel: string) => {
-    switch (channel) {
-      case "Email": return <Mail className="h-4 w-4" />;
-      case "WhatsApp": return <MessageSquare className="h-4 w-4" />;
-      case "SMS": return <Phone className="h-4 w-4" />;
-      case "Live Chat": return <MessageSquare className="h-4 w-4" />;
-      default: return <MessageSquare className="h-4 w-4" />;
+  const getPriorityColor = (priority: string) => {
+    switch (priority) {
+      case "high": return "bg-red-100 text-red-800";
+      case "medium": return "bg-yellow-100 text-yellow-800";
+      case "low": return "bg-green-100 text-green-800";
+      default: return "bg-gray-100 text-gray-800";
     }
   };
 
@@ -91,141 +82,166 @@ export function Conversations() {
           <h2 className="text-3xl font-bold">Conversations</h2>
           <p className="text-muted-foreground">Manage all customer communications in one place</p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline">
-            <Archive className="mr-2 h-4 w-4" />
-            Archive
-          </Button>
-          <Button>
-            <MessageSquare className="mr-2 h-4 w-4" />
-            New Conversation
-          </Button>
-        </div>
+        <Button>
+          <Send className="mr-2 h-4 w-4" />
+          New Message
+        </Button>
       </div>
 
-      {/* Conversation Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Conversations</CardTitle>
-            <MessageSquare className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">127</div>
-            <p className="text-xs text-green-600">+8 new today</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg Response Time</CardTitle>
-            <Clock className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">12min</div>
-            <p className="text-xs text-green-600">-23% improvement</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">AI Handled</CardTitle>
-            <Bot className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">78%</div>
-            <p className="text-xs text-green-600">+12% this month</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Satisfaction Score</CardTitle>
-            <Star className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">4.8</div>
-            <p className="text-xs text-green-600">+0.3 from last month</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Search and Filters */}
-      <div className="flex gap-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+      <div className="flex space-x-4 mb-6">
+        <div className="flex-1">
           <Input placeholder="Search conversations..." className="pl-10" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         </div>
-        <Button variant="outline">All Channels</Button>
-        <Button variant="outline">Unread Only</Button>
+        <Button variant="outline">
+          <Filter className="mr-2 h-4 w-4" />
+          Filter
+        </Button>
       </div>
 
-      {/* Conversations List */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Conversations</CardTitle>
-          <CardDescription>All customer interactions across channels</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {conversations.map((conversation) => (
-              <div key={conversation.id} className={`flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer ${conversation.unread > 0 ? 'bg-blue-50 border-blue-200' : ''}`}>
-                <div className="flex items-center space-x-4 flex-1">
-                  <div className="relative">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                      <User className="h-5 w-5 text-primary" />
-                    </div>
-                    {conversation.unread > 0 && (
-                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                        {conversation.unread}
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <div className="font-medium">{conversation.contact}</div>
-                      <div className="text-xs text-muted-foreground">• {conversation.company}</div>
-                    </div>
-                    <div className="text-sm text-muted-foreground truncate max-w-md">
-                      {conversation.lastMessage}
-                    </div>
-                    <div className="flex items-center gap-2 mt-1">
-                      <div className="flex items-center gap-1">
-                        {getChannelIcon(conversation.channel)}
-                        <span className="text-xs">{conversation.channel}</span>
-                      </div>
-                      <Badge variant="outline" size="sm">
-                        {conversation.agent.includes('AI') ? <Bot className="h-3 w-3 mr-1" /> : <User className="h-3 w-3 mr-1" />}
-                        {conversation.agent}
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
+      <Tabs defaultValue="all" className="space-y-6">
+        <TabsList>
+          <TabsTrigger value="all">All Messages</TabsTrigger>
+          <TabsTrigger value="unread">Unread (5)</TabsTrigger>
+          <TabsTrigger value="email">Email</TabsTrigger>
+          <TabsTrigger value="chat">Live Chat</TabsTrigger>
+          <TabsTrigger value="phone">Phone</TabsTrigger>
+        </TabsList>
 
-                <div className="flex items-center gap-4">
-                  <Badge className={getPriorityColor(conversation.priority)} variant="secondary">
-                    {conversation.priority}
-                  </Badge>
-                  <div className="text-sm text-muted-foreground">
-                    {conversation.timestamp}
+        <TabsContent value="all" className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-1">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Recent Conversations</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <div className="space-y-0">
+                    {conversations.map((conversation) => (
+                      <div key={conversation.id} className="p-4 border-b hover:bg-muted/50 cursor-pointer">
+                        <div className="flex items-start space-x-3">
+                          <div className="flex-shrink-0">
+                            {getChannelIcon(conversation.channel)}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between">
+                              <p className="font-medium text-sm">{conversation.contact}</p>
+                              {conversation.unread > 0 && (
+                                <Badge variant="destructive">
+                                  {conversation.unread}
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-xs text-muted-foreground">
+                              {conversation.email || conversation.phone}
+                            </p>
+                            <p className="text-sm text-muted-foreground truncate mt-1">
+                              {conversation.lastMessage}
+                            </p>
+                            <div className="flex items-center justify-between mt-2">
+                              <span className="text-xs text-muted-foreground">
+                                {conversation.timestamp}
+                              </span>
+                              <div className="flex space-x-1">
+                                {conversation.tags.map((tag, index) => (
+                                  <Badge key={index} variant="secondary">
+                                    {tag}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="flex gap-1">
-                    <Button size="sm" variant="ghost">
-                      <Phone className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" variant="ghost">
-                      <Video className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" variant="ghost">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="lg:col-span-2">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <CardTitle>John Smith</CardTitle>
+                      <CardDescription>john@example.com</CardDescription>
+                    </div>
+                    <div className="flex space-x-2">
+                      <Button variant="outline">
+                        <Star className="h-4 w-4" />
+                      </Button>
+                      <Button variant="outline">
+                        <Archive className="h-4 w-4" />
+                      </Button>
+                      <Button variant="outline">
+                        <MoreVertical className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4 mb-6">
+                    <div className="flex space-x-3">
+                      <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-medium">
+                        J
+                      </div>
+                      <div className="flex-1 bg-muted p-3 rounded-lg">
+                        <p className="text-sm">Hi! I'm interested in learning more about your AI automation services. Can you tell me about your pricing?</p>
+                        <p className="text-xs text-muted-foreground mt-1">Yesterday, 2:30 PM</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex space-x-3 justify-end">
+                      <div className="flex-1 bg-primary text-primary-foreground p-3 rounded-lg max-w-md">
+                        <p className="text-sm">Hello John! Thanks for your interest. I'd be happy to discuss our AI automation services with you. We offer several packages starting from $299/month.</p>
+                        <p className="text-xs opacity-80 mt-1">Yesterday, 3:15 PM</p>
+                      </div>
+                      <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-medium">
+                        Y
+                      </div>
+                    </div>
+
+                    <div className="flex space-x-3">
+                      <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-medium">
+                        J
+                      </div>
+                      <div className="flex-1 bg-muted p-3 rounded-lg">
+                        <p className="text-sm">Thanks for the quick response! When can we schedule a call?</p>
+                        <p className="text-xs text-muted-foreground mt-1">2 mins ago</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <Textarea 
+                      placeholder="Type your message here..." 
+                      className="min-h-[100px]"
+                    />
+                    <div className="flex justify-between items-center">
+                      <div className="flex space-x-2">
+                        <Button variant="outline">
+                          <Reply className="h-4 w-4" />
+                        </Button>
+                        <Button variant="outline">
+                          <Forward className="h-4 w-4" />
+                        </Button>
+                        <Button variant="outline">
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                      <Button>
+                        <Send className="mr-2 h-4 w-4" />
+                        Send Message
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-        </CardContent>
-      </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

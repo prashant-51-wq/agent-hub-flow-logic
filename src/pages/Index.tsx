@@ -7,6 +7,9 @@ import { AnalyticsDashboard } from "@/components/AnalyticsDashboard";
 import { CRM } from "@/components/CRM";
 import { Conversations } from "@/components/Conversations";
 import { Calendar } from "@/components/Calendar";
+import { WebsitesAndLandingPages } from "@/components/WebsitesAndLandingPages";
+import { AdCampaigns } from "@/components/AdCampaigns";
+import { PerformanceDashboard } from "@/components/PerformanceDashboard";
 import { useState } from "react";
 
 const Index = () => {
@@ -26,6 +29,12 @@ const Index = () => {
         return <Conversations />;
       case "calendar":
         return <Calendar />;
+      case "websites":
+        return <WebsitesAndLandingPages />;
+      case "advertising":
+        return <AdCampaigns />;
+      case "performance":
+        return <PerformanceDashboard />;
       case "agents":
         return <div className="p-8 text-center text-muted-foreground">My Agents section coming soon...</div>;
       case "clients":

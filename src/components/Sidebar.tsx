@@ -13,7 +13,10 @@ import {
   Contact,
   Calendar,
   MessageSquare,
-  Phone
+  Phone,
+  Globe,
+  TrendingUp,
+  Megaphone
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -30,6 +33,9 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
     { id: "crm", label: "CRM", icon: Contact },
     { id: "conversations", label: "Conversations", icon: MessageSquare },
     { id: "calendar", label: "Calendar", icon: Calendar },
+    { id: "websites", label: "Websites & Landing Pages", icon: Globe },
+    { id: "advertising", label: "Ad Campaigns", icon: Megaphone },
+    { id: "performance", label: "Performance Dashboard", icon: TrendingUp },
     { id: "agents", label: "My Agents", icon: Bot },
     { id: "clients", label: "Sub Accounts", icon: Users },
     { id: "billing", label: "Billing", icon: CreditCard },
@@ -63,6 +69,11 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
                   5
                 </Badge>
               )}
+              {item.id === "advertising" && (
+                <Badge variant="default" className="ml-auto">
+                  3
+                </Badge>
+              )}
             </Button>
           ))}
         </div>
@@ -85,6 +96,14 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
             <div className="flex justify-between">
               <span>Sub Accounts</span>
               <span className="font-medium">12</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Active Campaigns</span>
+              <span className="font-medium">8</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Websites</span>
+              <span className="font-medium">15</span>
             </div>
           </div>
         </div>
